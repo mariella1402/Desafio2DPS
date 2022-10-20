@@ -1,213 +1,177 @@
 /* eslint-disable prettier/prettier */
-/* eslint-disable no-eval */
-import React, {Component} from 'react';
-import {StyleSheet, Text, View,TouchableOpacity} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
-export default class App extends Component {
-  constructor() {
-    super();
+import Calc from './Funcion';
+import Operacion from './Operacion';
+
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      resultText: '',
-      calculationText: '',
+      display: '',
+      numerator: '',
+      denominator: '',
+      operator: '',
+      switchFractionSection: false,
     };
-
-    this.operations = ['DEL', '/', '*', '-', '+', '√', '!'];
   }
 
-  calculateResult() {
-    const text = this.state.resultText;
-    // parse text and calculate
-    this.setState({
-      calculationText: eval(text),
-    });
+  clear() {
+    this.setState((state, props) => ({display: ''}));
   }
 
-  validate() {
-    const text = this.state.resultText;
-    switch (text.slice(-1)) {
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-      case '√':
-      case '!':
-        return false;
+  evalutate(x, y, operator) {
+    if (operator == '+') {
+      this.setState((state, props) => ({display: parseInt(x) + parseInt(y)}));
+      this.setState((state, props) => ({switchFractionSection: false}));
+    } else if (operator == '-') {
+      this.setState((state, props) => ({display: parseInt(x) - parseInt(y)}));
+      this.setState((state, props) => ({switchFractionSection: false}));
+    } else if (operator == 'x') {
+      this.setState((state, props) => ({display: parseInt(x) * parseInt(y)}));
+      this.setState((state, props) => ({switchFractionSection: false}));
+    } else if (operator == '/') {
+      this.setState((state, props) => ({display: parseInt(x) / parseInt(y)}));
+      this.setState((state, props) => ({switchFractionSection: false}));
+    } else if (operator == '√') {
+      this.setState((state, props) => ({display: Math.sqrt(parseInt(y))}));
+      this.setState((state, props) => ({switchFractionSection: false}));
     }
-    return true;
-  }
-
-  buttonPressed(text) {
-    console.log(text);
-
-    if (text == '=') {
-      return this.validate() && this.calculateResult();
+    else {
+      this.setState((state, props) => ({display: this.factorial(parseInt(y))}));
+      this.setState((state, props) => ({switchFractionSection: false}));
     }
-    this.setState({
-      resultText: this.state.resultText + text,
-    });
+    this.setState(prevState => ({denominator: ''}));
+    this.setState(prevState => ({numerator: ''}));
   }
-
-  operate(operation) {
-    switch (operation) {
-      case 'DEL':
-        let text = this.state.resultText.split('');
-        text.pop();
-        this.setState({
-          resultText: text.join(''),
-        });
-        break;
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-      case '√':
-      case '!':
-        const lastChar = this.state.resultText.split('').pop();
-        if (this.operations.indexOf(lastChar) > 0) return;
-
-        if (text == '') return;
-        this.setState({
-          resultText: this.state.resultText + operation,
-        });
-        break;
+  addNumber(x) {
+    this.setState((state, props) => ({display: state.display + x}));
+    if (this.state.switchFractionSection == true) {
+      this.setState((state, props) => ({denominator: state.denominator + x}));
+    } else {
+      this.setState((state, props) => ({numerator: state.numerator + x}));
     }
   }
+  factorial(n) {
+    if (n === 0) return 1;
+    let f = 1;
+    for (let i = 1; i < n; i++) {
+        f = f * (i + 1);
+    }
+    return f;
+  }
+  
+  operatorSymbol(x) {
+    if (
+      this.state.numerator == '' &&
+      this.state.switchFractionSection == false
+    ) {
+      this.setState((state, props) => ({numerator: this.state.display}));
+    }
 
+    this.setState((state, props) => ({display: state.display + x}));
+    this.setState((state, props) => ({operator: x}));
+    this.setState((state, props) => ({switchFractionSection: true}));
+  }
   render() {
-    let rows = [];
-    let nums = [
-      [7, 8, 9],
-      [4, 5, 6],
-      [1, 2, 3],
-      ['.', 0, '='],
-    ];
-    for (let i = 0; i < 4; i++) {
-      let row = [];
-      for (let j = 0; j < 3; j++) {
-        row.push(
-          <TouchableOpacity
-            key={nums[i][j]}
-            onPress={() => this.buttonPressed(nums[i][j])}
-            style={styles.btn}>
-            <Text style={styles.btntext}>{nums[i][j]}</Text>
-          </TouchableOpacity>,
-        );
-      }
-      rows.push(
-        <View key={i} style={styles.row}>
-          {row}
-        </View>,
-      );
-    }
-
-  const  ops = [];
-    for (let i = 0; i < 7; i++) {
-      ops.push(
-        <TouchableOpacity
-          key={this.operations[i]}
-          style={styles.btn}
-          onPress={() => this.operate(this.operations[i])}>
-          <Text style={[styles.btnopstext, styles.white]}>
-            {this.operations[i]}
-          </Text>
-        </TouchableOpacity>,
-      );
-    }
-
     return (
       <View style={styles.container}>
-        <View style={styles.result}>
-          <Text
-            ellipsizeMode="head"
-            numberOfLines={1}
-            style={styles.resultText}>
-            {this.state.resultText}
-          </Text>
+        <View>
+          <Text style={styles.title}>Calculdora SM</Text>
         </View>
-        <View style={styles.calculation}>
-          <Text
-            ellipsizeMode="head"
-            numberOfLines={2}
-            style={styles.calculationText}>
-            {this.state.calculationText}
-          </Text>
+        <View style={styles.display}>
+          <Text style={styles.title}>{this.state.display}</Text>
         </View>
-        <View style={styles.buttons}>
-          <View style={styles.numbers}>{rows}</View>
-          <View style={styles.operations}>{ops}</View>
+        <View style={styles.calcKeyRow}>
+          <Calc displayKey="1" onClick={() => this.addNumber('1')} />
+          <Calc displayKey="2" onClick={() => this.addNumber('2')} />
+          <Calc displayKey="3" onClick={() => this.addNumber('3')} />
+        </View>
+        <View style={styles.calcKeyRow}>
+          <Calc displayKey="4" onClick={() => this.addNumber('4')} />
+          <Calc displayKey="5" onClick={() => this.addNumber('5')} />
+          <Calc displayKey="6" onClick={() => this.addNumber('6')} />
+        </View>
+        <View style={styles.calcKeyRow}>
+          <Calc displayKey="7" onClick={() => this.addNumber('7')} />
+          <Calc displayKey="8" onClick={() => this.addNumber('8')} />
+          <Calc displayKey="9" onClick={() => this.addNumber('9')} />
+        </View>
+        <View style={styles.calcKeyRow}>
+          <Calc displayKey="0" onClick={() => this.addNumber('0')} />
+          <Calc onClick={() => this.clear()} displayKey="AC" />
+          <Calc
+            displayKey="="
+            onClick={() =>
+              this.evalutate(
+                this.state.numerator,
+                this.state.denominator,
+                this.state.operator,
+              )
+            }
+          />
+        </View>
+        <View style={styles.calcKeyRow}>
+          <Operacion
+            displayKey="+"
+            onClick={() => this.operatorSymbol('+')}
+          />
+          <Operacion
+            displayKey="-"
+            onClick={() => this.operatorSymbol('-')}
+          />
+          <Operacion
+            displayKey="*"
+            onClick={() => this.operatorSymbol('x')}
+          />
+          <Operacion
+            displayKey="/"
+            onClick={() => this.operatorSymbol('/')}
+          />
+          <Operacion
+            displayKey="√"
+            onClick={() => this.operatorSymbol('√')}
+          />
+          <Operacion
+            displayKey="!"
+            onClick={() => this.operatorSymbol('!')}
+          />
         </View>
       </View>
     );
   }
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  white: {
-    color: 'white',
-  },
-  btn: {
-    flex: 1,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
-  btntext: {
-    fontSize: 36,
-    color: 'white',
-    fontFamily: 'sans-serif-light',
-  },
-  btnopstext: {
-    fontSize: 24,
-    color: 'white',
-    fontFamily: 'sans-serif-light',
-  },
-  resultText: {
-    fontSize: 70,
-    color: 'black',
-    fontFamily: 'sans-serif-light',
-    paddingEnd: 10,
-    paddingStart: 10,
-  },
-  calculationText: {
-    fontSize: 44,
-    color: '#1E2621',
-    fontFamily: 'sans-serif-light',
-    paddingEnd: 10,
-    paddingStart: 10,
-    marginBottom: 20,
-  },
-  row: {
-    flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  result: {
-    flex: 2,
-    backgroundColor: '#779885',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  calculation: {
-    flex: 1,
-    backgroundColor: '#779885',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  buttons: {
-    flexGrow: 5,
-    flexDirection: 'row',
-  },
-  numbers: {
-    flex: 3,
     backgroundColor: '#224330',
-  },
-  operations: {
-    flex: 1,
-    backgroundColor: '#346549',
+    alignItems: 'center',
     justifyContent: 'space-around',
+  },
+
+  display: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignContent: 'center',
+    backgroundColor: 'black',
+    width: '70%',
+    height: '10%',
+  },
+
+  title: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 36,
+  },
+
+  calcKeyRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%',
   },
 });
