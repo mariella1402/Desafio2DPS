@@ -1,6 +1,5 @@
-/* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {Component} from 'react';
 import {
   ScrollView,
   Text,
@@ -20,20 +19,20 @@ export default function Facturacion1() {
         <Text style={styles.converterbuttontext}>
           Color Negro con gris y blanco
         </Text>
-        <Text style={styles.converterbuttontext} />
         <Text style={styles.converterbuttontext2}>Precio: $8.50 USD</Text>
         <Text style={styles.converterbuttontext} />
-        <Text style={styles.converterbuttontext}>Cantidad a Comprar:</Text>
-        <InputSpinner style={styles.box2}
+        <Text style={styles.converterbuttontext}>Cantidad a comprar:</Text>
+        <InputSpinner
+          style={styles.box2}
           max={100}
           min={1}
           step={1}
           colorMax={'#f04048'}
-          colorMin={'#40c5f4'}
+          colorMin={'#008000'}
         />
-        <TouchableOpacity>
-        <Text style={styles.converterbuttontext} />
-        <Text style={styles.button}>COMPRAR/FACTURAR</Text>
+        <TouchableOpacity >
+          <Text style={styles.converterbuttontext} />
+          <Text style={styles.button}>Comprar/Facturar</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -41,10 +40,12 @@ export default function Facturacion1() {
 }
 const styles = StyleSheet.create({
   button: {
-    alignItems: "center",
-    backgroundColor: "#9C100A",
-    padding: 10,
-    color:'white',
+    alignItems: 'center',
+    backgroundColor: '#9C100A',
+    padding: 15,
+    color: 'white',
+    fontSize: 18,
+    borderRadius: 25,
   },
   converterbutton: {
     alignItems: 'center',
@@ -76,15 +77,20 @@ const styles = StyleSheet.create({
     maxHeight: 500,
   },
   box2: {
-    backgroundColor: '#008000',
+    backgroundColor: '#359A35',
     textAlign: 'center',
     margin: 5,
     alignItems: 'center',
+    fontSize: 50,
   },
-  converterbuttontext:{
-    color:'black',
-     },
-  converterbuttontext2:{
- color:'red',
+  converterbuttontext: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  converterbuttontext2: {
+    color: '#9C100A',
+    fontSize: 25,
+    fontWeight: 'bold',
   },
 });
