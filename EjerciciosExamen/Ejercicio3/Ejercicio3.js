@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import {View, Text, StyleSheet, Image, ScrollView,TouchableOpacity} from 'react-native';
-import { blusa, camisah } from './ProductsBD'
 
 export default function About(props) {
   const {navigation} = props;
@@ -19,79 +18,79 @@ export default function About(props) {
     <View style={styles.body}>
     <View style={styles.row}> 
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion1')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/sueterh.jpg')} />
               <Text style={styles.converterbuttontext}>Sueter Para caballero</Text>
               <Text style={styles.converterbuttontext}>Color Negro con gris y blanco</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $8.50 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $8.50 USD</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion3')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/jeansh.jpg')} />
              <Text style={styles.converterbuttontext}>Pantalon Para caballero</Text>
               <Text style={styles.converterbuttontext}>Color skyblue</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $15.90 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $15.90 USD</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion5')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/camisah.jpeg')} />
               <Text style={styles.converterbuttontext}>Camisa Para caballero</Text>
               <Text style={styles.converterbuttontext}>Color Rojo</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $5.99 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $5.99 USD</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion7')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/pansh.jpg')} />
               <Text style={styles.converterbuttontext}>Duo de Pans para caballero</Text>
               <Text style={styles.converterbuttontext}>Color Azul-negro/Blanco</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $25.90 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $25.90 USD</Text>
     </TouchableOpacity>
     </View>
     <View style={styles.row}>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion2')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/sueter.jpg')} />
               <Text style={styles.converterbuttontext}>Sueter para Dama</Text>
               <Text style={styles.converterbuttontext}>Color Rojo con Botones</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $11.90 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $11.90 USD</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion4')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/Jeans.jpeg')} />
               <Text style={styles.converterbuttontext}>Pantalon tiro alto para dama</Text>
               <Text style={styles.converterbuttontext}>Color skyblue</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $18.50 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $18.50 USD</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion6')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/blusa.jpg')} />
               <Text style={styles.converterbuttontext}>Blusa manga media para</Text>
               <Text style={styles.converterbuttontext}>Dama</Text>
               <Text style={styles.converterbuttontext}>Color verde musgo</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $7.85 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $7.85 USD</Text>
     </TouchableOpacity>
     <TouchableOpacity
-    onPress={() => navigation.navigate('Facturacion')}
+    onPress={() => navigation.navigate('Facturacion8')}
               style={styles.box}>
               <Image style={styles.img} source={require('../src/img/pans.jpg')} />
               <Text style={styles.converterbuttontext}>Duo de pans para Dama</Text>
               <Text style={styles.converterbuttontext}>Color gris/ocre</Text>
               <Text style={styles.converterbuttontext}/>
-              <Text style={styles.converterbuttontext}>Precio: $27.99 USD</Text>
+              <Text style={styles.converterbuttontext2}>Precio: $27.99 USD</Text>
     </TouchableOpacity>
     </View>
     </View>
@@ -109,6 +108,12 @@ const styles = StyleSheet.create({
    alignItems:'center',
    minHeight:300,
   maxHeight:300,
+  },
+  converterbuttontext:{
+    color:'black',
+     },
+  converterbuttontext2:{
+ color:'red',
   },
   reacompra:{
     minHeight:300,
