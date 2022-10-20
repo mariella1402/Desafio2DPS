@@ -5,6 +5,7 @@ import Ejercicio1 from '../Ejercicio1/Ejercicio1';
 import Ejercicio2 from '../Ejercicio2/Ejercicio2';
 import Ejercicio3 from '../Ejercicio3/Ejercicio3';
 import Menu from '../Menu';
+import Facturacion from '../Ejercicio3/Facturacion'
 const Stack = createStackNavigator();
 export default function Navigation() {
   return (
@@ -28,6 +29,11 @@ export default function Navigation() {
         name="Ejercicio3"
         component={Ejercicio3}
         options={{title: 'Ejercicio 3 (Tienda en Linea)', headerTitleAlign:'center'}}
+        />
+        <Stack.Screen
+        name="Facturacion"
+        component={Facturacion}
+        options={{title: 'Facturacion', headerTitleAlign:'center'}}
       />
     </Stack.Navigator>
   );
