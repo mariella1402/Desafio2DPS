@@ -11,7 +11,7 @@ export default class App extends Component {
       calculationText: '',
     };
 
-    this.operations = ['DEL', '/', '*', '-', '+'];
+    this.operations = ['DEL', '/', '*', '-', '+', '√', '!'];
   }
 
   calculateResult() {
@@ -29,6 +29,8 @@ export default class App extends Component {
       case '-':
       case '*':
       case '/':
+      case '√':
+      case '!':
         return false;
     }
     return true;
@@ -58,6 +60,8 @@ export default class App extends Component {
       case '-':
       case '*':
       case '/':
+      case '√':
+      case '!':
         const lastChar = this.state.resultText.split('').pop();
         if (this.operations.indexOf(lastChar) > 0) return;
 
@@ -97,7 +101,7 @@ export default class App extends Component {
     }
 
   const  ops = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
       ops.push(
         <TouchableOpacity
           key={this.operations[i]}
