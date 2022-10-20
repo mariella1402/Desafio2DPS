@@ -18,7 +18,6 @@ export default function Facturacion3() {
       <Image style={styles.img} source={require('../img/jeansh.jpg')} />
              <Text style={styles.converterbuttontext}>Pantalon Para caballero</Text>
               <Text style={styles.converterbuttontext}>Color skyblue</Text>
-              <Text style={styles.converterbuttontext}/>
               <Text style={styles.converterbuttontext2}>Precio: $15.90 USD</Text>
         <Text style={styles.converterbuttontext} />
         <Text style={styles.converterbuttontext}>Cantidad a Comprar:</Text>
@@ -26,12 +25,12 @@ export default function Facturacion3() {
           max={100}
           min={1}
           step={1}
-          colorMax={'#f04048'}
-          colorMin={'#40c5f4'}
+          olorMax={'#f04048'}
+          colorMin={'#008000'}
         />
         <TouchableOpacity>
         <Text style={styles.converterbuttontext} />
-        <Text style={styles.button}>COMPRAR/FACTURAR</Text>
+        <Text style={styles.button}>Comprar/Facturar</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -41,8 +40,10 @@ const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     backgroundColor: "#9C100A",
-    padding: 10,
+    padding: 15,
     color:'white',
+    fontSize:18,
+    borderRadius:25,
   },
   converterbutton: {
     alignItems: 'center',
@@ -74,15 +75,21 @@ const styles = StyleSheet.create({
     maxHeight: 500,
   },
   box2: {
-    backgroundColor: '#008000',
+    backgroundColor: '#359A35',
     textAlign: 'center',
     margin: 5,
     alignItems: 'center',
+    fontSize:50,
   },
   converterbuttontext:{
     color:'black',
+    fontSize:20,
+    fontWeight: 'bold',
      },
   converterbuttontext2:{
- color:'red',
+ color:'#9C100A',
+ fontSize:25,
+ fontWeight: 'bold'
   },
 });
+
