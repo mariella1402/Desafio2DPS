@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
 
-export default function Facturacion1(camisah, cantidad, total) {
+export default function Facturacion1() {
   const camisah = {
     Producname: 'Sueter para caballero',
     Precio: '8.50',
