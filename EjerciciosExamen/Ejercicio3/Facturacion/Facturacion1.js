@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React, {Component, useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -7,9 +7,9 @@ import {
   Image,
   View,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
-
 
 export default function Facturacion1() {
   return (
@@ -23,20 +23,23 @@ export default function Facturacion1() {
         <Text style={styles.converterbuttontext2}>Precio: $8.50 USD</Text>
         <Text style={styles.converterbuttontext} />
         <Text style={styles.converterbuttontext}>Cantidad a comprar:</Text>
-        <InputSpinner
-          style={styles.box2}
-          max={100}
-          min={1}
-          step={1}
-          colorMax={'#f04048'}
-          colorMin={'#008000'}
+        <TextInput
+        style={styles.cant}
+         name='cantidad'
+          type={Number}
+          onChangeText={setCantidad}
+          value={cantidad} 
         />
-          <TouchableOpacity>
-          
+        <TouchableOpacity >
           <Text style={styles.converterbuttontext} />
           <Text style={styles.button}>Comprar/Facturar</Text>
+          
         </TouchableOpacity>
+        <View>
+      <TextInput>{total}</TextInput>
       </View>
+      </View>
+      
     </ScrollView>
   );
 }
@@ -49,6 +52,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 25,
   },
+  cant:{
+    fontSize:20,
+    minWidth:50,
+   minHeight:50,
+   color:'black',
+   backgroundColor:'white'
+
+  },
   converterbutton: {
     alignItems: 'center',
     textAlign: 'center',
@@ -58,12 +69,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     maxHeight: 200,
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-  },
+  
   img: {
     maxWidth: 170,
     maxHeight: 170,
@@ -77,13 +83,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: 500,
     maxHeight: 500,
-  },
-  box2: {
-    backgroundColor: '#359A35',
-    textAlign: 'center',
-    margin: 5,
-    alignItems: 'center',
-    fontSize: 50,
   },
   converterbuttontext: {
     color: 'black',
