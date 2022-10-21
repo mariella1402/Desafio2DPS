@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {Component} from 'react';
+import React from 'react';
 import {
   ScrollView,
   Text,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
+
 
 export default function Facturacion1() {
   return (
@@ -30,7 +31,8 @@ export default function Facturacion1() {
           colorMax={'#f04048'}
           colorMin={'#008000'}
         />
-        <TouchableOpacity >
+          <TouchableOpacity>
+          
           <Text style={styles.converterbuttontext} />
           <Text style={styles.button}>Comprar/Facturar</Text>
         </TouchableOpacity>
