@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, Image, ScrollView,TouchableOpacity} from 'react-
 
 export default function About(props) {
   const {navigation} = props;
+  
 
   return (
     <>
