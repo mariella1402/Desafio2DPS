@@ -18,16 +18,12 @@ export default function Facturacion1() {
     Precio: '8.50',
   };
   const [cantidad, setCantidad] = useState();
-  const [total, setTotal] = useState(0);
-  const [descuento, setDescuento] = useState();
-  const [totalpago, setTotalpago] = useState();
+  const [total, setTotal] = useState();
 
   const calculo = () => {
     if (cantidad > 0) {
       if (cantidad > 15 && cantidad < 49) {
         setTotal(camisah.Precio * cantidad);
-        setDescuento(total*0.05);
-        setTotalpago(total-descuento);
       }
       if (cantidad > 49 && cantidad < 79) {
         console.log('aplicar el 13');
@@ -54,59 +50,18 @@ export default function Facturacion1() {
         <Text style={styles.converterbuttontext}>Cantidad a comprar:</Text>
         <TextInput
         style={styles.cant}
-          name="cantidad"
+         name='cantidad'
           type={Number}
           keyboardType="numeric"
           onChangeText={setCantidad}
-          value={cantidad}
+          value={cantidad} 
         />
-        <TouchableOpacity onPress={calculo}>
+        <TouchableOpacity >
           <Text style={styles.converterbuttontext} />
           <Text style={styles.button}>Comprar/Facturar</Text>
         </TouchableOpacity>
-
-      </View>
-      <View  style={styles.factura}>
-      <View style={styles.header}>
-      <Text style={styles.textheader}>Factura</Text>
-      </View>
-      <View style={styles.contcampos}>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Nombre</Text>
-      <TextInput
-           editable={false}
-          >{camisah.Producname}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Cantidad</Text>
-      <TextInput
-           editable={false}
-          >{cantidad}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Precio c/u</Text>
-      <TextInput
-           editable={false}
-          >${camisah.Precio}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Total</Text>
-      <TextInput
-           editable={false}
-          >${total}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Descuento</Text>
-      <TextInput
-           editable={false}
-          >${descuento}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Total a pagar</Text>
-      <TextInput
-           editable={false}
-          >${totalpago}</TextInput>
-      </View>
+        <View>
+      <TextInput>{total}</TextInput>
       </View>
       </View>
       </View>
@@ -155,16 +110,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 25,
   },
-  cant: {
-    borderRadius: 5,
-    borderWidth: 2,
-    fontSize: 20,
-    minWidth: 80,
-    maxHeight: 45,
-    marginTop:20,
-    color: 'black',
-    textAlign:'center',
-    backgroundColor: 'white',
+  cant:{
+    fontSize:20,
+    minWidth:50,
+   minHeight:50,
+   color:'black',
+   backgroundColor:'white'
+
   },
   converterbutton: {
     alignItems: 'center',
@@ -175,7 +127,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     maxHeight: 200,
   },
-
+  
   img: {
     maxWidth: 170,
     maxHeight: 170,
