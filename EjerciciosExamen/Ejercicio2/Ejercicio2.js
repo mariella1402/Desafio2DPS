@@ -19,6 +19,15 @@ const currencyPerRupee = {
   FRANCO: 0.9934,
 };
 
+const currencysim = {
+  DOLLAR: '$',
+  EURO: '€',
+  COLON: '₡',
+  PESOM: 'MXN$',
+  LIBRAE: '£',
+  FRANCO: 'Fr',
+};
+
 export default class Conversor extends React.Component {
   constructor(props) {
     super(props);
@@ -31,9 +40,10 @@ export default class Conversor extends React.Component {
     if (this.state.inputValue === '') {
       Alert.alert('Ingrese la cantidad en USD');
     } else {
-      let result =
-        parseFloat(this.state.inputValue) * currencyPerRupee[currency];
-      this.setState({resultValue: result.toFixed(2)});
+      let result = (parseFloat(this.state.inputValue) * currencyPerRupee[currency]);
+      let result1 = currencysim[currency];
+      this.setState({resultValue: result.toFixed(2) + " " + result1});
+
     }
   };
   render() {
@@ -84,7 +94,7 @@ export default class Conversor extends React.Component {
             </TouchableOpacity>
             <View style={styles.inputcontainer}>
               <Text style={styles.resultValue}>
-                = {this.state.resultValue} {this.buttonPressed}
+                ={this.state.resultValue} {this.buttonPressed}
               </Text>
             </View>
           </View>
