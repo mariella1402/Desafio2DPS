@@ -39,7 +39,7 @@ export default class App extends React.Component {
       this.setState((state, props) => ({switchFractionSection: false}));
     }
     else {
-      this.setState((state, props) => ({display: this.factorial(parseInt(y))}));
+      this.setState((state, props) => ({display: this.factorial(parseInt(x))}));
       this.setState((state, props) => ({switchFractionSection: false}));
     }
     this.setState(prevState => ({denominator: ''}));
