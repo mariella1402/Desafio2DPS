@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     color:'black',
      },
   converterbuttontext2:{
- color:'red',
+ color:'#9C100A',
   },
   reacompra:{
     minHeight:300,

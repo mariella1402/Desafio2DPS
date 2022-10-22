@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
+import React,  {useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -7,10 +7,35 @@ import {
   Image,
   View,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
 
 export default function Facturacion2() {
+  const camisah = {
+    Producname: 'Sueter para caballero',
+    Precio: '8.50',
+  };
+  const [cantidad, setCantidad] = useState();
+  const [total, setTotal] = useState();
+ this.state = {
+  cantidad:1,
+ };
+  const calculo = () => {
+    if ( parseFloat.cantidad > 0) {
+      if (cantidad > 15 && cantidad < 49) {
+        setTotal(camisah.Precio * cantidad);
+      }
+      if (cantidad > 49 && cantidad < 79) {
+        console.log('aplicar el 13');
+      }
+      if (cantidad > 79) {
+        console.log('aplicar el 25');
+      }
+    } else {
+      console.log(cantidad);
+    }
+  };
   return (
     <ScrollView>
       <View style={styles.box}>
@@ -21,24 +46,32 @@ export default function Facturacion2() {
               <Text style={styles.converterbuttontext} />
         <Text style={styles.converterbuttontext}>Cantidad a Comprar:</Text>
         <InputSpinner style={styles.box2}
-          max={100}
+          onChangeText={setCantidad}
+          value={this.state.cantidad}
+          max={1000}
           min={1}
           step={1}
           olorMax={'#f04048'}
           colorMin={'#008000'}
+          onChange={(cantidad1) => {
+    calculo(cantidad1);
+	}}
         />
-        <TouchableOpacity>
-        <Text style={styles.converterbuttontext} />
-        <Text style={styles.button}>Comprar/Facturar</Text>
+        <TouchableOpacity onPress={calculo}>
+          <Text style={styles.converterbuttontext} />
+          <Text style={styles.button}>Comprar/Facturar</Text>
         </TouchableOpacity>
+        <View>
+          <TextInput>{parseFloat.total}</TextInput>
+        </View>
       </View>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
   button: {
-    alignItems: "center",
-    backgroundColor: "#9C100A",
+    alignItems: 'center',
+    backgroundColor: '#9C100A',
     padding: 15,
     color:'white',
     fontSize:18,
@@ -88,6 +121,6 @@ const styles = StyleSheet.create({
   converterbuttontext2:{
  color:'#9C100A',
  fontSize:25,
- fontWeight: 'bold'
+ fontWeight: 'bold',
   },
 });

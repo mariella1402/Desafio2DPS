@@ -7,6 +7,7 @@ import {
   Image,
   View,
   TouchableOpacity,
+  Input,
   TextInput,
 } from 'react-native';
 import InputSpinner from 'react-native-input-spinner';
@@ -15,35 +16,29 @@ export default function Facturacion1() {
   const camisah = {
     Producname: 'Sueter para caballero',
     Precio: '8.50',
-  }
- const [cantidad, setCantidad]=useState()
- const [total, setTotal]=useState()
+  };
+  const [cantidad, setCantidad] = useState();
+  const [total, setTotal] = useState();
 
-  const calculo= ()=> {
-          if(cantidad > 0)
-          {
-            if(cantidad >15 && cantidad<49)
-            { 
-              setTotal(camisah.Precio*cantidad)
-
-            }
-            if(cantidad >49 && cantidad<79){
-              console.log('aplicar el 13')
-            }
-            if(cantidad >79){
-              console.log('aplicar el 25')
-            }
-            
-          }
-          else{
-            console.log('no tan mamado')          
-          }
-  }
-
- 
+  const calculo = () => {
+    if (cantidad > 0) {
+      if (cantidad > 15 && cantidad < 49) {
+        setTotal(camisah.Precio * cantidad);
+      }
+      if (cantidad > 49 && cantidad < 79) {
+        console.log('aplicar el 13');
+      }
+      if (cantidad > 79) {
+        console.log('aplicar el 25');
+      }
+    } else {
+      console.log('no tan mamado');
+    }
+  };
 
   return (
     <ScrollView>
+    <View style={styles.contenedor}>
       <View style={styles.box}>
         <Image style={styles.img} source={require('../img/sueterh.jpg')} />
         <Text style={styles.converterbuttontext}>Sueter para caballero</Text>
@@ -57,24 +52,56 @@ export default function Facturacion1() {
         style={styles.cant}
          name='cantidad'
           type={Number}
+          keyboardType="numeric"
           onChangeText={setCantidad}
           value={cantidad} 
         />
-       
-        <TouchableOpacity onPress={calculo} >
+        <TouchableOpacity >
           <Text style={styles.converterbuttontext} />
           <Text style={styles.button}>Comprar/Facturar</Text>
-          
         </TouchableOpacity>
         <View>
       <TextInput>{total}</TextInput>
       </View>
       </View>
-      
+      </View>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
+  camptext:{
+    fontSize:20,
+  },
+  camposfac:{
+    borderWidth: 2,
+    minWidth: 370,
+  },
+  contcampos:{
+    flex:1,
+    flexDirection:'column',
+  },
+  header:{
+  minHeight:30,
+  backgroundColor:'pink',
+  minWidth: 377,
+  alignItems:'center',
+  borderBottomWidth: 2,
+ },
+  contenedor:{
+    flex:1,
+    flexDirection: 'column',
+  },
+  factura:{
+    backgroundColor: '#B2D9B2',
+    textAlign: 'center',
+    margin: 5,
+    alignItems: 'center',
+    minHeight: 480,
+    borderWidth:3,
+  },
+  textheader:{
+    fontSize: 30,
+  },
   button: {
     alignItems: 'center',
     backgroundColor: '#9C100A',
