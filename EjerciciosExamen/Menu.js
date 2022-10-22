@@ -9,6 +9,7 @@ export default function Menu(props) {
     <View>
       <View>
         <Button
+          style={''}
           title="CALCULADORA"
           color={'#68C991'}
           onPress={() => navigation.navigate('Ejercicio1')}
