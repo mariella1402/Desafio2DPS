@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {Component, useState} from 'react';
 import {
   ScrollView,
@@ -9,30 +8,43 @@ import {
   TouchableOpacity,
   Input,
   TextInput,
+  Alert,
 } from 'react-native';
-import InputSpinner from 'react-native-input-spinner';
+import { useEffect } from 'react';
 
 export default function Facturacion1() {
+
+
+  const [shouldShow, setShouldShow] = useState(true);
   const camisah = {
     Producname: 'Sueter para caballero',
     Precio: '8.50',
   };
   const [cantidad, setCantidad] = useState();
-  const [total, setTotal] = useState();
+  const [total, setTotal] = useState(0);
+  const [descuento, setDescuento] = useState();
+  const [totalpago, setTotalpago] = useState();
+ 
 
   const calculo = () => {
     if (cantidad > 0) {
       if (cantidad > 15 && cantidad < 49) {
         setTotal(camisah.Precio * cantidad);
+        setDescuento(((camisah.Precio*cantidad)*0.05).toFixed(2));
+        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.05)).toFixed(2));
       }
       if (cantidad > 49 && cantidad < 79) {
-        console.log('aplicar el 13');
+        setTotal(camisah.Precio * cantidad);
+        setDescuento(((camisah.Precio*cantidad)*0.13).toFixed(2));
+        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.13)).toFixed(2));
       }
       if (cantidad > 79) {
-        console.log('aplicar el 25');
+        setTotal(camisah.Precio * cantidad);
+        setDescuento(((camisah.Precio*cantidad)*0.25).toFixed(2));
+        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.25)).toFixed(2));
       }
     } else {
-      console.log('no tan mamado');
+      Alert.alert("No se debe ingresar letras o numeros negativos")
     }
   };
 
@@ -43,7 +55,7 @@ export default function Facturacion1() {
         <Image style={styles.img} source={require('../img/sueterh.jpg')} />
         <Text style={styles.converterbuttontext}>Sueter para caballero</Text>
         <Text style={styles.converterbuttontext}>
-          Color Negro con gris y blanco
+          Color Negro con gris blanco
         </Text>
         <Text style={styles.converterbuttontext2}>Precio: $8.50 USD</Text>
         <Text style={styles.converterbuttontext} />
@@ -56,15 +68,56 @@ export default function Facturacion1() {
           onChangeText={setCantidad}
           value={cantidad} 
         />
-        <TouchableOpacity >
+        <TouchableOpacity onPress={calculo}>
           <Text style={styles.converterbuttontext} />
-          <Text style={styles.button}>Comprar/Facturar</Text>
+          <Text style={styles.button}>Comprar/Facturar</Text> 
         </TouchableOpacity>
-        <View>
-      <TextInput>{total}</TextInput>
       </View>
+      <View  style={styles.factura}>
+     
+      <View style={styles.header}>
+      <Text style={styles.textheader}>Factura</Text>
       </View>
+      <View style={styles.contcampos}>
+      <View style={styles.camposfac}>
+      <Text style={styles.camptext}>Nombre</Text>
+      <TextInput style={styles.textres}
+           editable={false}
+          >{camisah.Producname}</TextInput>
       </View>
+      <View style={styles.camposfac}>
+      <Text style={styles.camptext}>Cantidad</Text>
+      <TextInput style={styles.textres}
+           editable={false}
+          >{cantidad}</TextInput>
+      </View>
+      <View style={styles.camposfac}>
+      <Text style={styles.camptext}>Precio c/u</Text>
+      <TextInput style={styles.textres}
+           editable={false}
+          >${camisah.Precio}</TextInput>
+      </View>
+      <View style={styles.camposfac}>
+      <Text style={styles.camptext}>Total</Text>
+      <TextInput style={styles.textres}
+           editable={false}
+          >${total}</TextInput>
+      </View>
+      <View name='fac' style={styles.camposfac}>
+      <Text style={styles.camptext}>Descuento</Text>
+      <TextInput style={styles.textres}
+           editable={false}
+          >${descuento}</TextInput>
+      </View>
+      <View style={styles.camposfac}>
+      <Text style={styles.camptext}>Total a pagar</Text>
+      <TextInput style={styles.textres}
+           editable={false}
+          >${totalpago}</TextInput>
+      </View>
+    </View>
+      </View>
+    </View>
     </ScrollView>
   );
 }
@@ -81,17 +134,18 @@ const styles = StyleSheet.create({
     flexDirection:'column',
   },
   header:{
-  minHeight:30,
-  backgroundColor:'pink',
-  minWidth: 377,
-  alignItems:'center',
-  borderBottomWidth: 2,
+    minHeight:30,
+    backgroundColor:'pink',
+    minWidth: 377,
+    alignItems:'center',
+    borderBottomWidth: 2,
  },
   contenedor:{
     flex:1,
     flexDirection: 'column',
   },
   factura:{
+    display: 'flex',
     backgroundColor: '#B2D9B2',
     textAlign: 'center',
     margin: 5,
@@ -116,7 +170,20 @@ const styles = StyleSheet.create({
    minHeight:50,
    color:'black',
    backgroundColor:'white'
-
+  },
+  textres:{
+fontSize:25,
+  },
+  cant: {
+    borderRadius: 5,
+    borderWidth: 2,
+    fontSize: 20,
+    minWidth: 80,
+    maxHeight: 45,
+    marginTop:20,
+    color: 'black',
+    textAlign:'center',
+    backgroundColor: 'white',
   },
   converterbutton: {
     alignItems: 'center',
@@ -127,7 +194,6 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     maxHeight: 200,
   },
-  
   img: {
     maxWidth: 170,
     maxHeight: 170,
