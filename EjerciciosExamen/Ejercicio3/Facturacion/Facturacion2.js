@@ -36,7 +36,7 @@ export default function Facturacion1() {
       if (cantidad < 15) {
         setTotal(camisah.Precio * cantidad);
         setDescuento(((camisah.Precio*cantidad)*0).toFixed(2));
-        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.05)).toFixed(2));
+        setTotalpago((camisah.Precio*cantidad).toFixed(2));
       }
       if (cantidad >= 15 && cantidad < 49) {
         setTotal(camisah.Precio * cantidad);
