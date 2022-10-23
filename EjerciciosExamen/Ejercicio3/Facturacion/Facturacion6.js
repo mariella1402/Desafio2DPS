@@ -1,4 +1,5 @@
-import React, {Component, useState} from 'react';
+/* eslint-disable prettier/prettier */
+import React, {useState} from 'react';
 import {
   ScrollView,
   Text,
@@ -6,17 +7,12 @@ import {
   Image,
   View,
   TouchableOpacity,
-  Input,
   TextInput,
   Alert,
 } from 'react-native';
-import { useEffect } from 'react';
 
 export default function Facturacion1() {
-
-
-  const [shouldShow, setShouldShow] = useState(true);
-  const camisah = {
+const camisah = {
     Producname: 'Blusa manga media para Dama',
     Precio: '7.85',
   };
@@ -24,136 +20,165 @@ export default function Facturacion1() {
   const [total, setTotal] = useState(0);
   const [descuento, setDescuento] = useState();
   const [totalpago, setTotalpago] = useState();
- 
+  const [shouldShow, setShouldShow] = useState(false);
+
+  const funciones = ()=>{
+  calculo();
+  mostrar();  };
+  const mostrar = ()=>{
+    setShouldShow(!shouldShow);
+  };
 
   const calculo = () => {
     if (cantidad > 0) {
+      if (cantidad <= 15) {
+        setTotal(camisah.Precio * cantidad);
+        setDescuento(((camisah.Precio * cantidad) * 0).toFixed(2));
+        setTotalpago(((camisah.Precio * cantidad) - ((camisah.Precio * cantidad) * 0.05)).toFixed(2));
+      }
       if (cantidad > 15 && cantidad < 49) {
         setTotal(camisah.Precio * cantidad);
-        setDescuento(((camisah.Precio*cantidad)*0.05).toFixed(2));
-        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.05)).toFixed(2));
+        setDescuento((camisah.Precio * cantidad * 0.05).toFixed(2));
+        setTotalpago(
+          (
+            camisah.Precio * cantidad -
+            camisah.Precio * cantidad * 0.05
+          ).toFixed(2),
+        );
       }
       if (cantidad > 49 && cantidad < 79) {
         setTotal(camisah.Precio * cantidad);
-        setDescuento(((camisah.Precio*cantidad)*0.13).toFixed(2));
-        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.13)).toFixed(2));
+        setDescuento((camisah.Precio * cantidad * 0.13).toFixed(2));
+        setTotalpago(
+          (
+            camisah.Precio * cantidad -
+            camisah.Precio * cantidad * 0.13
+          ).toFixed(2),
+        );
       }
       if (cantidad > 79) {
         setTotal(camisah.Precio * cantidad);
-        setDescuento(((camisah.Precio*cantidad)*0.25).toFixed(2));
-        setTotalpago(((camisah.Precio*cantidad)-((camisah.Precio*cantidad)*0.25)).toFixed(2));
+        setDescuento((camisah.Precio * cantidad * 0.25).toFixed(2));
+        setTotalpago(
+          (
+            camisah.Precio * cantidad -
+            camisah.Precio * cantidad * 0.25
+          ).toFixed(2),
+        );
       }
     } else {
-      Alert.alert("No se debe ingresar letras o numeros negativos")
+      Alert.alert('No se debe ingresar letras o numeros negativos');
     }
   };
 
   return (
     <ScrollView>
-    <View style={styles.contenedor}>
-      <View style={styles.box}>
-        <Image style={styles.img} source={require('../img/blusa.jpg')} />
-        <Text style={styles.converterbuttontext}>Blusa manga media para Dama</Text>
-        <Text style={styles.converterbuttontext}>
-          Color Verde musgo
-        </Text>
-        <Text style={styles.converterbuttontext2}>Precio: $7.85 USD</Text>
-        <Text style={styles.converterbuttontext} />
-        <Text style={styles.converterbuttontext}>Cantidad a comprar:</Text>
-        <TextInput
-        style={styles.cant}
-         name='cantidad'
-          type={Number}
-          keyboardType="numeric"
-          onChangeText={setCantidad}
-          value={cantidad} 
-        />
-        <TouchableOpacity onPress={calculo}>
+      <View style={styles.contenedor}>
+        <View style={styles.box}>
+          <Image style={styles.img} source={require('../img/blusa.jpg')} />
+          <Text style={styles.converterbuttontext}>
+            Blusa manga media para Dama
+          </Text>
+          <Text style={styles.converterbuttontext}>Color Verde musgo</Text>
+          <Text style={styles.converterbuttontext2}>Precio: $7.85 USD</Text>
           <Text style={styles.converterbuttontext} />
-          <Text style={styles.button}>Comprar/Facturar</Text> 
-        </TouchableOpacity>
+          <Text style={styles.converterbuttontext}>Cantidad a comprar:</Text>
+          <TextInput
+            style={styles.cant}
+            name="cantidad"
+            type={Number}
+            keyboardType="numeric"
+            onChangeText={setCantidad}
+            value={cantidad}
+          />
+          <TouchableOpacity onPress={funciones}>
+            <Text style={styles.converterbuttontext} />
+            <Text style={styles.button}>Comprar/Facturar</Text>
+          </TouchableOpacity>
+        </View>
+        {}
+        {shouldShow ? (
+        <View style={styles.factura}>
+          <View style={styles.header}>
+            <Text style={styles.textheader}>Factura</Text>
+          </View>
+          <View style={styles.contcampos}>
+            <View style={styles.camposfac}>
+              <Text style={styles.camptext}>Nombre</Text>
+              <TextInput style={styles.textres} editable={false}>
+                {camisah.Producname}
+              </TextInput>
+            </View>
+            <View style={styles.camposfac}>
+              <Text style={styles.camptext}>Cantidad</Text>
+              <TextInput style={styles.textres} editable={false}>
+                {cantidad}
+              </TextInput>
+            </View>
+            <View style={styles.camposfac}>
+              <Text style={styles.camptext}>Precio c/u</Text>
+              <TextInput style={styles.textres} editable={false}>
+                ${camisah.Precio}
+              </TextInput>
+            </View>
+            <View style={styles.camposfac}>
+              <Text style={styles.camptext}>Total</Text>
+              <TextInput style={styles.textres} editable={false}>
+                ${total}
+              </TextInput>
+            </View>
+            <View name="fac" style={styles.camposfac}>
+              <Text style={styles.camptext}>Descuento</Text>
+              <TextInput style={styles.textres} editable={false}>
+                ${descuento}
+              </TextInput>
+            </View>
+            <View style={styles.camposfac}>
+              <Text style={styles.camptext}>Total a pagar</Text>
+              <TextInput style={styles.textres} editable={false}>
+                ${totalpago}
+              </TextInput>
+            </View>
+          </View>
+        </View>
+        ) : null}
       </View>
-      <View  style={styles.factura}>
-     
-      <View style={styles.header}>
-      <Text style={styles.textheader}>Factura</Text>
-      </View>
-      <View style={styles.contcampos}>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Nombre</Text>
-      <TextInput style={styles.textres}
-           editable={false}
-          >{camisah.Producname}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Cantidad</Text>
-      <TextInput style={styles.textres}
-           editable={false}
-          >{cantidad}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Precio c/u</Text>
-      <TextInput style={styles.textres}
-           editable={false}
-          >${camisah.Precio}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Total</Text>
-      <TextInput style={styles.textres}
-           editable={false}
-          >${total}</TextInput>
-      </View>
-      <View name='fac' style={styles.camposfac}>
-      <Text style={styles.camptext}>Descuento</Text>
-      <TextInput style={styles.textres}
-           editable={false}
-          >${descuento}</TextInput>
-      </View>
-      <View style={styles.camposfac}>
-      <Text style={styles.camptext}>Total a pagar</Text>
-      <TextInput style={styles.textres}
-           editable={false}
-          >${totalpago}</TextInput>
-      </View>
-    </View>
-      </View>
-    </View>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
-  camptext:{
-    fontSize:20,
+  camptext: {
+    fontSize: 20,
   },
-  camposfac:{
+  camposfac: {
     borderWidth: 2,
     minWidth: 370,
   },
-  contcampos:{
-    flex:1,
-    flexDirection:'column',
-  },
-  header:{
-    minHeight:30,
-    backgroundColor:'pink',
-    minWidth: 377,
-    alignItems:'center',
-    borderBottomWidth: 2,
- },
-  contenedor:{
-    flex:1,
+  contcampos: {
+    flex: 1,
     flexDirection: 'column',
   },
-  factura:{
+  header: {
+    minHeight: 30,
+    backgroundColor: 'pink',
+    minWidth: 377,
+    alignItems: 'center',
+    borderBottomWidth: 2,
+  },
+  contenedor: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  factura: {
     display: 'flex',
     backgroundColor: '#B2D9B2',
     textAlign: 'center',
     margin: 5,
     alignItems: 'center',
     minHeight: 480,
-    borderWidth:3,
+    borderWidth: 3,
   },
-  textheader:{
+  textheader: {
     fontSize: 30,
   },
   button: {
@@ -164,15 +189,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     borderRadius: 25,
   },
-  cant:{
-    fontSize:20,
-    minWidth:50,
-   minHeight:50,
-   color:'black',
-   backgroundColor:'white'
-  },
-  textres:{
-fontSize:25,
+  textres: {
+    fontSize: 25,
   },
   cant: {
     borderRadius: 5,
@@ -180,9 +198,9 @@ fontSize:25,
     fontSize: 20,
     minWidth: 80,
     maxHeight: 45,
-    marginTop:20,
+    marginTop: 20,
     color: 'black',
-    textAlign:'center',
+    textAlign: 'center',
     backgroundColor: 'white',
   },
   converterbutton: {
